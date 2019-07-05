@@ -1,5 +1,11 @@
-ssh-keygen -f ~/.ssh/id_rsa -N ""
 
+SSHFILE=~/.ssh/id_rsa
+
+if not test -f "$SSHFILE"; then
+    ssh-keygen -f ~/.ssh/id_rsa -N ""
+else
+    echo "SSH keys already set up, skipping"
+fi
 
 # Updating stuff and installing stuff
 sudo apt-get update
