@@ -97,3 +97,23 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+export PATH=$PATH:~/miniconda3
+
+function aur {
+	git clone https://aur.archlinux.org/$1.git
+}
+
+function sudosearch {
+	sudo find / -name $1 2> /dev/null
+}
+
+function bright {
+	xbacklight -set $1
+}
+
+
+function gcl {
+    git clone $1
+}
