@@ -108,3 +108,7 @@ function aur {
 function sudosearch {
 	sudo find / -name $1 2> /dev/null
 }
+
+function bright {
+	xbacklight -set $1
+}
