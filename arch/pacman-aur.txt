@@ -3,7 +3,6 @@ lightdm-git
 ttf-ms-win8
 ttf-win7-fonts
 ttf-office-2007-fonts
-ttf-tahoma
 ttf-vista-fonts
 lightdm-slick-greeter
 xorg-xinit
@@ -29,7 +28,7 @@ lightdm-settings
 volctl
 ttf-ms-fonts
 ttf-vista-fonts
-ttf-ms-win10
+ttf-tahoma
 ttf-google-fonts-git
 ttf-inconsolata-g
 font-mathematica
