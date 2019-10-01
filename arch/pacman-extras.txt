@@ -5,10 +5,11 @@ minecraft-launcher
 discord-canary
 discord-cli-git
 digilent.waveforms
-wine-staging
+wine-staging-git
 lutris
 playonlinux
-lib32-alsa
+lib32-alsa-lib
+lib32-alsa-plugins
 lib32-libxml2
 lib32-mpg123
 lib32-alsa-plugins
@@ -32,7 +33,6 @@ steam
 wqy-zenhei
 steamcmd
 all-repository-fonts
-adobe-source-code-pro-fonts
 jdk
 jre
 clion
@@ -44,3 +44,8 @@ steamos-compositor-plus
 nvidia
 nvidia-utils
 lib32-nvidia-utils
+mesa
+xf86-video-intel
+cuda
+cudnn
+nvidia-settings
