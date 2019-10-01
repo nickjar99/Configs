@@ -10,4 +10,4 @@ cd yay-git
 makepkg -si
 
 cd ~
-yay -Syuu dislocker lightdm lightdm-slick-greeter xorg-xinit alacritty xorg-server-xephyr lightdm-settings volctl ttf-ms-fonts ttf-vista-fonts ttf-ms-win10 ttf-google-fonts-git ttf-inconsolata-g font-mathematica ttf-mac-fonts gnome-commander transmission-gtk file-roller ark 
+yay -Syuu - < pacman-aur.txt

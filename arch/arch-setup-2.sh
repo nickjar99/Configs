@@ -1,6 +1,5 @@
 # Todo: add more packages
-pacstrap /mnt base base-devel wpa_supplicant networkmanager dialog iw sudo git zsh vim wget curl neofetch screenfetch glances ncdu networkmanager-openconnect nm-connection-editor network-manager-applet grub os-prober efibootmgr ntfs-3g exfat-utils btrfs-progs dosfstools squashfs-tools zsh i3-gaps dmenu i3status chromium firefox ffmpeg vlc baobab gparted gedit code pulseaudio pulseaudio-alsa ttf-roboto ttf-liberation texlive-core texlive-fontsextra python-matplotlib python-pip xorg mesa dolphin nautilus ark gnome-search-tool cmake htop 
-
+pacstrap /mnt - < pacman-main.txt
 genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt
