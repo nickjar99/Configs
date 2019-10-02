@@ -5,7 +5,7 @@ minecraft-launcher
 discord-canary
 discord-cli-git
 digilent.waveforms
-wine-staging-git
+wine-staging
 lutris
 playonlinux
 lib32-alsa-lib
@@ -21,7 +21,7 @@ lib32-giflib
 lib32-libpng
 lib32-gnutls
 lib32-gst-plugins-base
-lib32-gst-plugins-ugly
+lib32-gst-plugins-good
 wine-installer
 lib32-libcups
 winetricks-git
