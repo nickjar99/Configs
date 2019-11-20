@@ -101,13 +101,9 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=$PATH:~/miniconda3
 
-function aur {
-	git clone https://aur.archlinux.org/$1.git
-}
+function aur { git clone https://aur.archlinux.org/$1.git }
 
-function sudosearch {
-	sudo find / -name $1 2> /dev/null
-}
+function sudosearch { sudo find / -name $1 2> /dev/null }
 
 function bright {
 	xbacklight -set $1
@@ -115,9 +111,12 @@ function bright {
 
 
 function gcl {
-	git clone $1
+	git clone $*
 }
 function vol {
-	sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%"
+	sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 $1%"
 }
+
+
+function ytdl { youtube-dl $* }
 

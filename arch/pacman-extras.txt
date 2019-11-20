@@ -48,7 +48,6 @@ mesa
 xf86-video-intel
 cuda
 cudnn
-nvidia-settings
 qt4
 gtk3
 gtk2
@@ -70,4 +69,3 @@ nautilus-admin
 nautilus-bluetooth-git
 polybar-git
 arduino-git
-powerline-fonts-git
