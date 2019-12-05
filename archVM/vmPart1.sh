@@ -5,7 +5,7 @@ sed -i "93iInclude = /etc/pacman.d/mirrorlist" /etc/pacman.conf
 
 pacman --noconfirm -Sy git parted
 
-timedate set-ntp true
+timedatectl set-ntp true
 
 # Setting up partitions
 parted -s /dev/sda mktable msdos
