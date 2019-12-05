@@ -3,6 +3,7 @@ sed -i '6i# Mines LUG Mirror\nServer = https://lug.mines.edu/mirrors/archlinux/$
 sed -i "92i[multilib]" /etc/pacman.conf
 sed -i "93iInclude = /etc/pacman.d/mirrorlist" /etc/pacman.conf
 
+systemctl dhcpcd@enp0s3.service
 pacman --noconfirm -Sy git parted
 
 timedatectl set-ntp true
