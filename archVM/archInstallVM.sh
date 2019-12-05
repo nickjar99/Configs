@@ -19,39 +19,39 @@ cp /root/.zshrc /mnt/root/.zshrc-install
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /usr/bin/bash -c "cd /root && git clone https://gitlab.com/NickTheSecond/configs.git && cd configs && sh archInstallVM2-chroot.sh"
 
-ln -sf /usr/share/zoneinfo/America/Denver/etc/localtime
-hwclock --systohc
+# ln -sf /usr/share/zoneinfo/America/Denver/etc/localtime
+# hwclock --systohc
 
-# Locales
-sed -i "14ien_US.UTF-8 UTF-8" /etc/locale.gen
-locale-gen
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+# # Locales
+# sed -i "14ien_US.UTF-8 UTF-8" /etc/locale.gen
+# locale-gen
+# echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
-# Hostname
-echo "Choose a hostname:"
-read hostname
-echo "$hostname" >> /etc/hostname
-echo "127.0.0.1\tlocalhost\n::1\tlocalhost\n127.0.1.1\t$hostname.localdomain $hostname"
+# # Hostname
+# echo "Choose a hostname:"
+# read hostname
+# echo "$hostname" >> /etc/hostname
+# echo "127.0.0.1\tlocalhost\n::1\tlocalhost\n127.0.1.1\t$hostname.localdomain $hostname"
 
-# add nick user and passwords
-sed -i "82i%wheel ALL=(ALL) ALL" /etc/sudoers
-useradd -G wheel -m -s /usr/bin/zsh nick
-read -ps "Enter a password for both accounts: " password
-echo "$password" | passwd
-echo "$password" | passwd nick
+# # add nick user and passwords
+# sed -i "82i%wheel ALL=(ALL) ALL" /etc/sudoers
+# useradd -G wheel -m -s /usr/bin/zsh nick
+# read -ps "Enter a password for both accounts: " password
+# echo "$password" | passwd
+# echo "$password" | passwd nick
 
-# makepkg
-sed -i "40iCFLAGS=\"-march=native -02 -pipe -fno-plt"\" /etc/makepkg.conf
-sed -i "41iCXXFLAGS=\"${CFLAGS}\"" /etc/makepkg.conf
-sed -i "44iMAKEFLAGS=\"-j$(nproc)" / etc/makepkg.conf
-sed -i "130iCOMPRESSGZ=(pigz -c -f -n)" /etc/makepkg.conf
-sed -i "132iCOMPRESSXZ=(xz -c -z - --threads=0)" /etc/makepkg.conf
-sed -i "131iCOMPRESSBZ2=(pbzip2 -c -f)" /etc/makepkg.conf
-sed -i "133iCOMPRESSZST=(zstd -c -z -q - --threads=0)
+# # makepkg
+# sed -i "40iCFLAGS=\"-march=native -02 -pipe -fno-plt"\" /etc/makepkg.conf
+# sed -i "41iCXXFLAGS=\"${CFLAGS}\"" /etc/makepkg.conf
+# sed -i "44iMAKEFLAGS=\"-j$(nproc)" / etc/makepkg.conf
+# sed -i "130iCOMPRESSGZ=(pigz -c -f -n)" /etc/makepkg.conf
+# sed -i "132iCOMPRESSXZ=(xz -c -z - --threads=0)" /etc/makepkg.conf
+# sed -i "131iCOMPRESSBZ2=(pbzip2 -c -f)" /etc/makepkg.conf
+# sed -i "133iCOMPRESSZST=(zstd -c -z -q - --threads=0)
 
-# more packages
-pacman -S zstd gcc-libs glances
+# # more packages
+# pacman -S zstd gcc-libs glances
 
-# Bootloader
-grub-install --target=i386-pc /dev/sda
-grub-mkconfig -o /boot/grub/grub.cfg
+# # Bootloader
+# grub-install --target=i386-pc /dev/sda
+# grub-mkconfig -o /boot/grub/grub.cfg
