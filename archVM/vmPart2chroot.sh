@@ -34,7 +34,7 @@ sed -i "131iCOMPRESSBZ2=(pbzip2 -c -f)" /etc/makepkg.conf
 sed -i "133iCOMPRESSZST=(zstd -c -z -q - --threads=0)" /etc/makepkg.conf
 
 # more packages
-pacman -S zstd gcc-libs glances base-devel neofetch ncdu make pigz pbzip2 unzip xz
+pacman --noconfirm -S zstd gcc-libs glances base-devel neofetch ncdu make pigz pbzip2 unzip xz
 
 # Bootloader
 echo "Before grub install"
