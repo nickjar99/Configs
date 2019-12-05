@@ -31,7 +31,7 @@ sed -i "44iMAKEFLAGS=\"-j$(nproc)" / etc/makepkg.conf
 sed -i "130iCOMPRESSGZ=(pigz -c -f -n)" /etc/makepkg.conf
 sed -i "132iCOMPRESSXZ=(xz -c -z - --threads=0)" /etc/makepkg.conf
 sed -i "131iCOMPRESSBZ2=(pbzip2 -c -f)" /etc/makepkg.conf
-sed -i "133iCOMPRESSZST=(zstd -c -z -q - --threads=0)
+sed -i "133iCOMPRESSZST=(zstd -c -z -q - --threads=0)" /etc/makepkg.conf
 
 # more packages
 pacman -S zstd gcc-libs glances base-devel neofetch ncdu make pigz pbzip2 unzip xz
