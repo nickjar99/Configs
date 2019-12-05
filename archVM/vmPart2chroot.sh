@@ -34,16 +34,10 @@ sed -i "131iCOMPRESSBZ2=(pbzip2 -c -f)" /etc/makepkg.conf
 sed -i "133iCOMPRESSZST=(zstd -c -z -q - --threads=0)" /etc/makepkg.conf
 
 # more packages
-pacman --noconfirm -S zstd gcc-libs glances base-devel neofetch ncdu make pigz pbzip2 unzip xz virtualbox-guest-utils virtualbox-guest-modules-arch
+pacman --noconfirm -S zstd gcc-libs glances base-devel neofetch ncdu make pigz pbzip2 unzip xz os-prober ntfs-3g exfat-utils 
 
 # Bootloader
 echo "Before grub install"
-sleep 4s
 grub-install --target=i386-pc /dev/sda
 echo "Before grub config"
-sleep 4s
 grub-mkconfig -o /boot/grub/grub.cfg
-
-echo "Before zsh"
-sleep 4s
-/usr/bin/zsh
