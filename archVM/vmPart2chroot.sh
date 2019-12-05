@@ -39,3 +39,5 @@ pacman -S zstd gcc-libs glances base-devel neofetch ncdu make pigz pbzip2 unzip 
 # Bootloader
 grub-install --target=i386-pc /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
+
+exit
