@@ -15,7 +15,8 @@ mkfs.ext4 /dev/sda1
 mount /dev/sda1 /mnt
 pacstrap /mnt --noconfirm base sudo vim nano git wget curl zsh iputils dhcpcd 
 
-cp /root/.zshrc /mnt/root/.zshrc-install
+cp /root/.zshrc /mnt/root/.zshrc
+cp /root/.zshrc /mnt/root/.zshrc-installer
 genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt /usr/bin/bash -c "cd /root && git clone https://gitlab.com/NickTheSecond/configs.git && cd configs/archVM && sh archInstallVM2-chroot.sh"
