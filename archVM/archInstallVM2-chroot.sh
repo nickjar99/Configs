@@ -1,23 +1,5 @@
-# mirrorlist & repos
-sed -i '6i# Mines LUG Mirror\nServer = https://lug.mines.edu/mirrors/archlinux/$repo/os/$arch' /etc/pacman.d/mirrorlist
-sed -i "92i[multilib]" /etc/pacman.conf
-sed -i "93iInclude = /etc/pacman.d/mirrorlist" /etc/pacman.conf
-
-pacman --noconfirm -Sy git parted
-
-timedate set-ntp true
-
-# Setting up partitions
-parted -s /dev/sda mktable msdos
-parted -s /dev/sda mkpart primary ext4 0% 100%
-
-mkfs.ext4 /dev/sda1
-mount /dev/sda1 /mnt
-pacstrap /mnt --noconfirm base base-devel sudo vim nano neofetch ncdu git wget curl zsh make pigz pbzip2 unzip xz iputils dhcpcd 
-
-cp /root/.zshrc /mnt/root/.zshrc-install
-genfstab -U /mnt >> /mnt/etc/fstab
-arch-chroot /mnt /usr/bin/bash -c "cd /root && git clone https://gitlab.com/NickTheSecond/configs.git && cd configs && sh archInstallVM2-chroot.sh"
+echo "Nice, you made it to part 2!"
+sleep 2s
 
 ln -sf /usr/share/zoneinfo/America/Denver/etc/localtime
 hwclock --systohc
