@@ -37,7 +37,13 @@ sed -i "133iCOMPRESSZST=(zstd -c -z -q - --threads=0)" /etc/makepkg.conf
 pacman -S zstd gcc-libs glances base-devel neofetch ncdu make pigz pbzip2 unzip xz
 
 # Bootloader
+echo "Before grub install"
+sleep 4s
 grub-install --target=i386-pc /dev/sda
+echo "Before grub config"
+sleep 4s
 grub-mkconfig -o /boot/grub/grub.cfg
 
+echo "Before zsh"
+sleep 4s
 /usr/bin/zsh
