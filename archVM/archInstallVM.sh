@@ -17,7 +17,7 @@ pacstrap /mnt --noconfirm base base-devel sudo vim nano neofetch ncdu git wget c
 
 cp /root/.zshrc /mnt/root/.zshrc-install
 genfstab -U /mnt >> /mnt/etc/fstab
-arch-chroot /mnt /usr/bin/bash -c "cd /root && git clone https://gitlab.com/NickTheSecond/configs.git && cd configs && sh archInstallVM2-chroot.sh"
+arch-chroot /mnt /usr/bin/bash -c "cd /root && git clone https://gitlab.com/NickTheSecond/configs.git && cd configs/archVM && sh archInstallVM2-chroot.sh"
 
 # ln -sf /usr/share/zoneinfo/America/Denver/etc/localtime
 # hwclock --systohc
