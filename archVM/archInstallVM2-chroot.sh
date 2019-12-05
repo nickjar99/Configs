@@ -19,8 +19,8 @@ echo "127.0.0.1\tlocalhost\n::1\tlocalhost\n127.0.1.1\t$hostname.localdomain $ho
 sed -i "82i%wheel ALL=(ALL) ALL" /etc/sudoers
 useradd -G wheel -m -s /usr/bin/zsh nick
 read -sp "Enter a password for both accounts: " password
-echo "$password" | passwd
-echo "$password" | passwd nick
+echo "$password\n$password" | passwd
+echo "$password\n$password" | passwd nick
 
 # makepkg
 sed -i "40iCFLAGS=\"-march=native -02 -pipe -fno-plt"\" /etc/makepkg.conf
