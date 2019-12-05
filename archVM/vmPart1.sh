@@ -20,6 +20,5 @@ cp /root/.zshrc /mnt/root/.zshrc
 cp /root/.zshrc /mnt/root/.zshrc-installer
 genfstab -U /mnt >> /mnt/etc/fstab
 
-cp -r /root/configs /mnt/root/configs
-arch-chroot /mnt /usr/bin/zsh -c "sh /root/config/archVM/vmPart2chroot.sh"
 
+arch-chroot /mnt /usr/bin/zsh -c "cd /root && git clone https://gitlab.com/NickTheSecond/configs.git && cd configs/archVM && sh vmPart2chroot.sh"
