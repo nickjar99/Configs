@@ -14,7 +14,7 @@ parted -s /dev/sda mkpart primary ext4 0% 100%
 
 echo "y" | mkfs.ext4 /dev/sda1
 mount /dev/sda1 /mnt
-pacstrap /mnt --noconfirm base sudo vim nano git wget curl zsh iputils dhcpcd 
+pacstrap /mnt --noconfirm base grub sudo vim nano git wget curl zsh iputils dhcpcd 
 
 cp /root/.zshrc /mnt/root/.zshrc
 cp /root/.zshrc /mnt/root/.zshrc-installer
