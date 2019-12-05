@@ -19,6 +19,8 @@ echo "127.0.0.1\tlocalhost\n::1\tlocalhost\n127.0.1.1\t$hostname.localdomain $ho
 sed -i "82i%wheel ALL=(ALL) ALL" /etc/sudoers
 useradd -G wheel -m -s /usr/bin/zsh nick
 read -sp "Enter a password for both accounts: " password
+echo "temp\ntemp" | passd
+echo "temp\ntemp" | passwd nick
 echo "root:$password" | chpasswd
 echo "nick:$password" | chpasswd
 
