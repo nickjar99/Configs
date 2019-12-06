@@ -1,5 +1,5 @@
 # mirrorlist & repos
-sed -i "6i# Mines LUG Mirror\nServer = https://lug.mines.edu/mirrors/archlinux/$repo/os/$arch" /etc/pacman.d/mirrorlist
+sed -i "6i# Mines LUG Mirror\nServer = https://lug.mines.edu/mirrors/archlinux/\$repo/os/\$arch" /etc/pacman.d/mirrorlist
 sed -i "92i[multilib]" /etc/pacman.conf
 sed -i "93iInclude = /etc/pacman.d/mirrorlist" /etc/pacman.conf
 
