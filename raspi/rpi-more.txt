@@ -1,0 +1,17 @@
+neofetch
+glances
+htop
+gparted
+gedit
+baobab
+chromium
+imagemagick
+ffmpeg
+youtube-dl
+firefox
+python3
+python3-pip
+dialog
+
+speedtest-cli
+hdparm

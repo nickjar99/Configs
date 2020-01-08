@@ -1,0 +1,16 @@
+wget
+curl
+vim
+ncdu
+powerline
+zsh
+git
+vim
+nano
+zip
+pigz
+pbzip2
+unzip
+exfat-utils
+realvnc-vnc-server
+realvnc-vnc-viewer
