@@ -51,31 +51,32 @@ git config --global user.name "njarmusz"
 git config --global credential.helper store
 
 
+DEFAULT_USER=${whoami} # makes the user running the script the default user
+echo "\nDEFAULT_USER=${DEFAULT_USER}\n"
 # oh-my-zsh
+
 if [ -d ~/.oh-my-zsh ]; then rm -rf ~/.oh-my-zsh ~/.zshrc; fi
 curl -o /tmp/install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 sudo su $USER -c "sh /tmp/install.sh --unattended"
 
-sudo chsh -s /usr/bin/zsh
-
 echo "Customizing oh-my-zsh install..."
 sed "11s/robbyrussell/agnoster/" -i ~/.zshrc
-echo '\nprompt_context() {
-  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
-  fi
-}'\n >> ~/.zshrc
 echo "\nalias ytdl=youtube-dl\n" >> ~/.zshrc
 echo "\nalias gcl=\"git clone\"\n" >> ~/.zshrc
-sed "219d" -i ~/.oh-my-zsh/themes/agnoster.zsh-theme
+sed "219d; 91,94d; 90s/{/{}/" -i ~/.oh-my-zsh/themes/agnoster.zsh-theme
 
 ###########################################################################################################
 # zsh install (root)
 sudo su -c '
 if [ -d ~/.oh-my-zsh ]; then rm -rf ~/.oh-my-zsh ~/.zshrc; fi
 sudo su $USER -c "sh /tmp/install.sh --unattended"
-chsh -s /usr/bin/zsh'
+'
+if [ $SHELL!=/usr/bin/zsh ]; then
+    sudo chsh -s /usr/bin/zsh
+    sudo su -c "chsh -s /usr/bin/zsh"
+fi
 rm /tmp/install.sh
+
 ###########################################################################################################
 
 
@@ -95,3 +96,4 @@ sudo apt install - < rpi-more.txt
 wget https://packagecloud.io/headmelted/codebuilds/gpgkey -O - | sudo apt-key add -
 curl -L https://raw.githubusercontent.com/headmelted/codebuilds/master/docs/installers/apt.sh | sudo bash
 
+zsh
