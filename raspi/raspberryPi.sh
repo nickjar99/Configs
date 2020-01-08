@@ -42,7 +42,7 @@ sudo systemctl start ssh
 
 
 # Core programs
-sudo apt install - < rpi-core.txt
+sudo apt install -y - < rpi-core.txt
 
 
 # Git config
@@ -91,7 +91,7 @@ echo -e "${password}\n${password}\n" | sudo vncpasswd -service
 
 
 # More programs (maybe change later)
-sudo apt install - < rpi-more.txt
+sudo apt install -y - < rpi-more.txt
 wget https://packagecloud.io/headmelted/codebuilds/gpgkey -O - | sudo apt-key add -
 curl -L https://raw.githubusercontent.com/headmelted/codebuilds/master/docs/installers/apt.sh | sudo bash
 
