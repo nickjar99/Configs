@@ -1,3 +1,10 @@
+# Standardizing the directory
+#echo ${BASH_SOURCE}
+#sleep 1
+#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# BAD solution
+cd ~/configs/raspi
 
 
 if [ ! -f ~/.progress1 ]; then
@@ -65,7 +72,8 @@ sudo apt install -y wget curl vim ncdu powerline zsh git nano zip pigz pbzip2 un
 sh ../oh-my-zsh-full.sh
 
 # More programs (maybe change later)
-sudo apt install -y - < rpi-more.txt
+#sudo apt install -y - < rpi-more.txt
+sudo apt install -y neofetch glances htop gparted gedit baobab chromium imagemagick ffmpeg youtube-dl firefox-esr python3 python3-pip dialog speedtest-cli hdparm
 wget https://packagecloud.io/headmelted/codebuilds/gpgkey -O - | sudo apt-key add -
 curl -L https://raw.githubusercontent.com/headmelted/codebuilds/master/docs/installers/apt.sh | sudo bash
 
