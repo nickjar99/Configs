@@ -9,6 +9,7 @@ if [ ! -f ./progress1 ]; then
 
     # Making my own janky changes
     sudo cp ./rpi${version}BootConfig.txt /boot/config.txt
+fi
 
     # Have the user change settings
     sudo raspi-config

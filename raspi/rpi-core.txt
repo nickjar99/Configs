@@ -5,7 +5,6 @@ ncdu
 powerline
 zsh
 git
-vim
 nano
 zip
 pigz
