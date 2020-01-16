@@ -1,6 +1,6 @@
 
 
-if [ ! -f ./progress1 ]; then
+if [ ! -f ~/configs/raspi/progress1 ]; then
     echo "What kind of pi? (3/4)"
     read version
     
@@ -14,7 +14,7 @@ if [ ! -f ./progress1 ]; then
     sudo raspi-config
 
     # saving progress before restart
-    touch progress1
+    touch ~/configs/raspi/progress1
     sudo shutdown -r now
 fi
 
