@@ -7,7 +7,7 @@
 cd ~/configs/raspi
 
 
-if [ ! -f ~/.progress1 ]; then
+if [ ! -f .progress1 ]; then
     echo "What kind of pi? (3/4)"
     read version
     
@@ -21,15 +21,15 @@ if [ ! -f ~/.progress1 ]; then
     sudo raspi-config
 
     # saving progress before restart
-    touch ~/.progress1
+    touch .progress1
     sudo shutdown -r now
 fi
 
 
 # Checking for progress
-if [ ! -f ~/.progress1 ]; then exit 1; fi
+if [ ! -f .progress1 ]; then exit 1; fi
 
-if [ ! -f ~/.[progress2 ]; then
+if [ ! -f .[progress2 ]; then
     printf "Choose a password (will be used for accounts & VNC): "
     read -s password
     passwd pi - < $passwd
@@ -60,7 +60,7 @@ if [ ! -f ~/.[progress2 ]; then
     git config --global user.name "njarmusz"
     git config --global credential.helper store
 
-    touch ~/.progress2
+    touch .progress2
 fi
 
 # Core programs
