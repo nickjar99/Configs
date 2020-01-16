@@ -6,23 +6,26 @@
 # BAD solution
 cd ~/configs/raspi
 
+if [ ! -d ~/.ssh ]; then touch .progress1; fi
 
 if [ ! -f .progress1 ]; then
-    echo "What kind of pi? (3/4)"
-    read version
-    
+    # Making my own janky changes
+    echo "Changing boot options"
+    sudo cp ./rpiBootConfig.txt /boot/config.txt
+
     sudo apt-get update
     sudo apt-get upgrade
-
-    # Making my own janky changes
-    sudo cp ./rpi${version}BootConfig.txt /boot/config.txt
 
     # Have the user change settings
     sudo raspi-config
 
     # saving progress before restart
     touch .progress1
-    sudo shutdown -r now
+    echo "Shutdown? (y/n)"
+    read answer
+    if [ answer = "y" ]; then
+        sudo shutdown -r now
+    fi
 fi
 
 
@@ -74,6 +77,7 @@ sh ../oh-my-zsh-full.sh
 # More programs (maybe change later)
 #sudo apt install -y - < rpi-more.txt
 sudo apt install -y neofetch glances htop gparted gedit baobab chromium imagemagick ffmpeg youtube-dl firefox-esr python3 python3-pip dialog speedtest-cli hdparm
+# VS Code
 wget https://packagecloud.io/headmelted/codebuilds/gpgkey -O - | sudo apt-key add -
 curl -L https://raw.githubusercontent.com/headmelted/codebuilds/master/docs/installers/apt.sh | sudo bash
 

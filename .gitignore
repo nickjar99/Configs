@@ -1,2 +1,3 @@
 arch/pacman-all.txt
 install.sh
+raspi/.progress*
