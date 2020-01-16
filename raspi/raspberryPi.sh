@@ -10,15 +10,16 @@ if [ ! -d ~/.ssh ]; then touch .progress1; fi
 
 if [ ! -f .progress1 ]; then
     # Making my own janky changes
-    echo "Changing boot options"
-    sudo cp ./rpiBootConfig.txt /boot/config.txt
+    sudo raspi-config nonint do_camera 0
+    sudo raspi-config nonint do_ssh 0
+    sudo raspi-config nonint do_vnc 0
+    sudo raspi-config nonint do_spi 0
+    sudo raspi-config nonint do_i2c 0
+    sudo raspi-config nonint do_serial 0
 
     sudo apt-get update
     sudo apt-get upgrade
-
-    # Have the user change settings
-    sudo raspi-config
-
+    
     # saving progress before restart
     touch .progress1
     echo "Shutdown? (y/n)"

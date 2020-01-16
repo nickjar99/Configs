@@ -17,6 +17,7 @@ sudo su -c '
 if [ -d ~/.oh-my-zsh ]; then rm -rf ~/.oh-my-zsh ~/.zshrc; fi
 sudo su $USER -c "sh /tmp/install.sh --unattended"
 '
+# Changing default shells
 if [ $SHELL!=/usr/bin/zsh ]; then
     sudo chsh -s /usr/bin/zsh
     sudo su -c "chsh -s /usr/bin/zsh"
