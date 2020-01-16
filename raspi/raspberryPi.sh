@@ -1,6 +1,6 @@
 
 
-if [ ! -f ~/configs/raspi/progress1 ]; then
+if [ ! -f ~/.progress1 ]; then
     echo "What kind of pi? (3/4)"
     read version
     
@@ -14,55 +14,55 @@ if [ ! -f ~/configs/raspi/progress1 ]; then
     sudo raspi-config
 
     # saving progress before restart
-    touch ~/configs/raspi/progress1
+    touch ~/.progress1
     sudo shutdown -r now
 fi
 
 
 # Checking for progress
-if [ ! -f ./progress1 ]; then exit 1; rm progress1; fi
+if [ ! -f ~/.progress1 ]; then exit 1; fi
 
+if [ ! -f ~/.[progress2 ]; then
+    printf "Choose a password (will be used for accounts & VNC): "
+    read -s password
+    passwd pi - < $passwd
+    echo -e "${password}\n${password}\n" | sudo passwd pi
 
-printf "Choose a password: "
-read -s password
-passwd pi - < $passwd
-echo -e "${password}\n${password}\n" | sudo passwd pi
+    # Setting up ssh keys if they aren't already
+    if [ ! -d ~/.ssh ]; then
+        ssh-keygen -N "" -f ~/.ssh/id_rsa
+    else
+        echo "SSH keys already exist"
+    fi
 
+    # Starting SSH daemon
+    sudo systemctl enable ssh
+    sudo systemctl start ssh
 
-# Setting up ssh keys if they aren't already
-if [ ! -d ~/.ssh ]; then
-    ssh-keygen -N "" -f ~/.ssh/id_rsa
-else
-    echo "SSH keys already exist"
+    # VNC config
+    if sudo grep -Fq Authentication=VncAuth /root/.vnc/config.d/vncserver-x11
+    then
+        sudo sed 's/AuthenticationystemAuth/AuthenticatioVncAuth/' -i /root/.vnc/config.d/vncserver-x11
+    else
+        sudo su -c 'echo Authentication=VncAuth >> /root/.vnc/config.d/vncserver-x11'
+    fi
+    echo -e "${password}\n${password}\n" | sudo vncpasswd -service
+
+    # Git config
+    git config --global user.email "njarmusz@mymail.mines.edu"
+    git config --global user.name "njarmusz"
+    git config --global credential.helper store
+
+    touch ~/.progress2
 fi
-
-
-# Starting SSH daemon
-sudo systemctl enable ssh
-sudo systemctl start ssh
-
 
 # Core programs
-sudo apt install -y - < rpi-core.txt
+#sudo apt install -y - < rpi-core.txt
+sudo apt install -y wget curl vim ncdu powerline zsh git nano zip pigz pbzip2 unzip exfat-utils realvnc-vnc-server realvnc-vnc-viewer
 
 
-# Git config
-git config --global user.email "njarmusz@mymail.mines.edu"
-git config --global user.name "njarmusz"
-git config --global credential.helper store
-
+# Zsh setup
 sh ../oh-my-zsh-full.sh
-
-
-# VNC config
-if sudo grep -Fq Authentication=VncAuth /root/.vnc/config.d/vncserver-x11
-then
-    sudo sed 's/AuthenticationystemAuth/AuthenticatioVncAuth/' -i /root/.vnc/config.d/vncserver-x11
-else
-    sudo su -c 'echo Authentication=VncAuth >> /root/.vnc/config.d/vncserver-x11'
-fi
-echo -e "${password}\n${password}\n" | sudo vncpasswd -service
-
 
 # More programs (maybe change later)
 sudo apt install -y - < rpi-more.txt
