@@ -19,7 +19,8 @@ sudo su $USER -c "sh /tmp/install.sh --unattended"
 '
 # Changing default shells
 if [ $SHELL!=/usr/bin/zsh ]; then
-    sudo chsh -s /usr/bin/zsh
+    # needs password
+    chsh -s /usr/bin/zsh
     sudo su -c "chsh -s /usr/bin/zsh"
 fi
 rm /tmp/install.sh

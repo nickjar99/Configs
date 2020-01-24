@@ -18,7 +18,7 @@ if [ ! -f .progress1 ]; then
     sudo raspi-config nonint do_serial 0
 
     sudo apt-get update
-    sudo apt-get upgrade
+    sudo apt-get upgrade -y
     
     # saving progress before restart
     touch .progress1
@@ -70,6 +70,7 @@ fi
 # Core programs
 #sudo apt install -y - < rpi-core.txt
 sudo apt install -y wget curl vim ncdu powerline zsh git nano zip pigz pbzip2 unzip exfat-utils realvnc-vnc-server realvnc-vnc-viewer
+sudo apt autoremove -y
 
 
 # Zsh setup
