@@ -2,15 +2,19 @@ termux-setup-storage
 
 pkg up
 
-pkg in -y game-repo science-repo unstable-repo x11-repo root-repo termux-apt-repo
+pkg in -y game-repo science-repo unstable-repo x11-repo root-repo
 
-pkg in -y git wget curl openssh nano neofetch htop man 
+pkg in -y git wget curl openssh nano neofetch htop man termux-api
 
 # Setting up ssh keys if they aren't already
 if [ ! -d ~/.ssh ]; then
     ssh-keygen -N "" -f ~/.ssh/id_rsa
 else
     echo "SSH keys already exist"
+fi
+
+if [! -f ~/.termux/boot/start-sshd]; then
+    echo "#!/data/data/com.termux/files/usr/bin/sh\n    termux-wake-lock\n    sshd"
 fi
 
 # youtube-dl
