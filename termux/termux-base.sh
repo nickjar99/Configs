@@ -22,6 +22,7 @@ curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /data/data/com.termux/f
 chmod a+rx /data/data/com.termux/files/usr/bin/youtube-dl
 
 # oh-my-zsh
+if [ -d ~/.oh-my-zsh ]; then rm -rf ~/.oh-my-zsh ~/.zshrc; fi
 curl -o install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 sh install.sh --unattended
 
