@@ -6,6 +6,8 @@ pkg in -y game-repo science-repo unstable-repo x11-repo root-repo
 
 pkg in -y git wget curl openssh nano neofetch htop man termux-api zsh tigervnc nano vim
 
+bash ../git.sh
+
 # Setting up ssh keys if they aren't already
 if [ ! -d ~/.ssh ]; then
     ssh-keygen -N "" -f ~/.ssh/id_rsa
