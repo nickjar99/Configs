@@ -4,9 +4,9 @@ pkg up -y
 
 pkg in -y game-repo science-repo unstable-repo x11-repo root-repo
 
-pkg in -y git wget curl openssh python3 nano neofetch htop man termux-api zsh tigervnc nano vim
+pkg in -y git wget curl openssh python neofetch htop man termux-api zsh tigervnc nano vim
 
-bash ../git.sh
+git config credential.helper store                                                                                      git config --global user.email "njarmusz@mymail.mines.edu"                                                              git config --global user.name "njarmusz" 
 
 # Setting up ssh keys if they aren't already
 if [ ! -d ~/.ssh ]; then
@@ -47,3 +47,5 @@ if  [ ! -f ~/.vnc/passwd ]; then vncpasswd; fi
 # its-pointless repo
 curl -LO https://its-pointless.github.io/setup-pointless-repo.sh
 bash setup-pointless-repo.sh
+
+echo "Finished script!"
