@@ -4,7 +4,7 @@ pkg up -y
 
 pkg in -y game-repo science-repo unstable-repo x11-repo root-repo
 
-pkg in -y git wget curl openssh nano neofetch htop man termux-api zsh tigervnc nano vim
+pkg in -y git wget curl openssh python3 nano neofetch htop man termux-api zsh tigervnc nano vim
 
 bash ../git.sh
 
