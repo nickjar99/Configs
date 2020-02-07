@@ -1,10 +1,10 @@
 termux-setup-storage
 
-pkg up
+pkg up -y
 
 pkg in -y game-repo science-repo unstable-repo x11-repo root-repo
 
-pkg in -y git wget curl openssh nano neofetch htop man termux-api
+pkg in -y git wget curl openssh nano neofetch htop man termux-api zsh tigervnc nano vim
 
 # Setting up ssh keys if they aren't already
 if [ ! -d ~/.ssh ]; then
@@ -12,6 +12,7 @@ if [ ! -d ~/.ssh ]; then
 else
     echo "SSH keys already exist"
 fi
+sshd
 
 if [! -f ~/.termux/boot/start-sshd]; then
     echo "#!/data/data/com.termux/files/usr/bin/sh\n    termux-wake-lock\n    sshd"
@@ -27,12 +28,19 @@ curl -o install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mast
 sh install.sh --unattended
 echo "Customizing oh-my-zsh install..."
 sed "11s/robbyrussell/agnoster/" -i ~/.zshrc
-sed "219d; 91,94d; 90s/{/{}/" -i ~/.oh-my-zsh/themes/agnoster.zsh-theme
+# sed "219d; 91,94d; 90s/{/{}/" -i ~/.oh-my-zsh/themes/agnoster.zsh-theme
 # aliases
 echo "alias ytdl=youtube-dl\n" >> ~/.zshrc
 echo "alias gcl=\"git clone\"\n" >> ~/.zshrc
 echo "alias nf=\"neofetch\"\n" >> ~/.zshrc
 
+echo "alias home=\"cd ~/storage/shared\""
+chsh -s zsh
+
+rm install.sh
+
+# vnc (partial)
+if  [ ! -f ~/.vnc/passwd ]; then vncpasswd; fi
 
 # its-pointless repo
 curl -LO https://its-pointless.github.io/setup-pointless-repo.sh
