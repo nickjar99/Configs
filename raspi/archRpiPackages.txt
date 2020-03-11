@@ -21,12 +21,14 @@ tar
 pbzip2
 ntfs-3g
 exfat-utils
-f2fs-utils
+f2fs-tools
 sudo
 openssh
 tigervnc
-xorg-server xf86-video-fbdev xorg-xrefresh
-xorg-clock
+xorg-server
+xf86-video-fbdev
+xorg-xrefresh
+xorg-xclock
 xterm
 make
 gcc
