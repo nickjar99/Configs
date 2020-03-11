@@ -59,3 +59,6 @@ speedtest-cli
 xorg-server-xephyr
 xfce4-whiskermenu-plugin
 pacman-contrib
+papirus-icon-theme
+papirus-maia-icon-theme
+adobe-source-code-pro-fonts
