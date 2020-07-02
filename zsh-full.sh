@@ -3,8 +3,6 @@ if [ -d ~/.oh-my-zsh ]; then rm -rf ~/.oh-my-zsh ~/.zshrc; fi
 curl -o install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 sudo su $USER -c "sh install.sh --unattended"
 
-sh zsh-customize.sh
-
 ###########################################################################################################
 # zsh install (root)
 sudo su -c '
@@ -20,3 +18,5 @@ fi
 rm install.sh
 
 ###########################################################################################################
+
+sh zsh-customize.sh
