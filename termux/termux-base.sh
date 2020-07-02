@@ -1,3 +1,5 @@
+#!/bin/bash
+
 termux-setup-storage
 
 pkg up -y

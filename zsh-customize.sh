@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Customizing oh-my-zsh install..."
 
 sed "11s/robbyrussell/agnoster/" -i ~/.zshrc
