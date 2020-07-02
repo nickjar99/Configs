@@ -23,9 +23,7 @@ if [ $REINSTALL = 1 ]; then
     echo "Reinstalling zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-    sed "11 s/robbyrussell/agnoster" ~/.zshrc
-    echo "\nalias ytdl=youtube-dl\n" >> ~/.zshrc
-    echo "\nalias gcl=\"git clone\"\n" >> ~/.zshrc
+    sh zsh-customize.sh
 
 else
     echo "Not reinstalling zsh"
