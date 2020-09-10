@@ -6,7 +6,8 @@ pkg up -y
 
 pkg in -y game-repo science-repo unstable-repo x11-repo root-repo
 
-pkg in -y git wget curl openssh python neofetch htop man termux-api zsh tigervnc nano vim
+pkg in -y git wget curl openssh python neofetch htop man termux-api zsh tigervnc nano vim zip ncdu ffmpeg tsu build-essential:w
+
 
 git config credential.helper store                                                                                      git config --global user.email "njarmusz@mymail.mines.edu"                                                              git config --global user.name "njarmusz" 
 
