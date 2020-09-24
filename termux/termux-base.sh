@@ -8,8 +8,11 @@ pkg in -y game-repo science-repo unstable-repo x11-repo root-repo
 
 pkg in -y git wget curl openssh python neofetch htop man termux-api zsh tigervnc nano vim zip ncdu ffmpeg tsu build-essential bsdtar proot   
 
-
-git config credential.helper store                                                                                      git config --global user.email "njarmusz@mymail.mines.edu"                                                              git config --global user.name "njarmusz" 
+git config --global credential.helper store
+git config --global user.email "njarmusz@mymail.mines.edu"
+git config --global user.name "njarmusz"
+git config --global http.postBuffer 2097152000
+git config --global https.postBuffer 2097152000
 
 # Setting up ssh keys if they aren't already
 if [ ! -d ~/.ssh ]; then
