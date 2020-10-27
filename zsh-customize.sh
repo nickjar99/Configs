@@ -10,6 +10,6 @@ echo "alias gcl=\"git clone\"\n" >> ~/.zshrc
 echo "alias nf=\"neofetch\"\n" >> ~/.zshrc
 
 
-echo "function y () { youtube-dl -o "%(title)s.%(ext)s" $@ }" >> ~/.zshrc
+echo "function y () { youtube-dl -o \"%(title)s.%(ext)s\" $@ }" >> ~/.zshrc
 
 
