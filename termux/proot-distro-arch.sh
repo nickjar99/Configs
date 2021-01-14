@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pacman -Syuu git wget curl zsh sudo vim
+pacman -Syuu --noconfirm git wget curl zsh sudo vim
 
 useradd -m -G wheel user
 
