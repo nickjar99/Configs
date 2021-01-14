@@ -15,7 +15,8 @@ sh zsh-customize.sh
 sh git.sh
 
 # Arch setup scripts
-./patchmakepkg
-./makeyay
+cd ~/Configs/termux/
+./archbins/patchmakepkg
+./archbins/makeyay
 
 yay -Syuu yay-git ncdu zsh ncdu neofetch git-lfs base-devel
