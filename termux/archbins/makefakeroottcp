@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Copyright 2017-2020 by SDRausty. All rights reserved, see LICENSE 🌎 🌍 🌏
+# Hosting sdrausty.github.io/TermuxArch courtesy https://pages.github.com.
+# https://sdrausty.github.io/TermuxArch/README has info about this project.
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# build and install fakeroot-tcp
+##############################################################################
+# IFS=$'\n\t'
+set -Eeuo pipefail
+shopt -s nullglob globstar
+unset LD_PRELOAD
+VERSIONID=2.0.593
+ 
+_TRPERR_() {  # run on script error
+	local RV="$?"
+	printf "\\e[?25h\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "TermuxArch WARNING:  Generated script signal ${RV:-unknown} near or at line number ${1:-unknown} by `${2:-command}`!"
+	exit 201
+}
+ 
+_TRPET_() {  # run on exit
+	local RV="$?" 
+  	printf "" 
+	 
+	if [[ "$RV" = 0 ]]
+	then
+		printf "\\e[0;32m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $@ 2.0.593" "DONE 🏁 "
+		printf "\\e]2; %s: %s \007" "${0##*/} $@" "DONE 🏁 "
+	else 
+		printf "\\e[0;32m%s \\e[0m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $@ 2.0.593" "[Exit Signal $RV]" "DONE  🏁 "
+		printf "\033]2; %s: %s %s \007" "${0##*/} $@" "[Exit Signal $RV]" "DONE 🏁 "
+	fi
+	printf "\e[?25h\e[0m"
+	set +Eeuo pipefail
+	exit
+}
+ 
+_TRPSIG_() {  # run on signal
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Signal $? received!\\e[0m\\n"
+ 	exit 211
+}
+ 
+_TRPQ_() {  # run on quit
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Quit signal $? received!\\e[0m\\n"
+ 	exit 221
+}
+ 
+trap '_TRPERR_ $LINENO $BASH_COMMAND $?' ERR
+trap _TRPET_ EXIT
+trap _TRPSIG_ HUP INT TERM
+trap _TRPQ_ QUIT
+ 
+if [ "$UID" = "0" ]
+then
+printf "\\n\\e[1;37m%s\\e[0m\\n\\n" "ERROR:  Script '${0##*/}' should not be used as root:  The TermuxArch command 'addauser' creates user accounts in Arch Linux in PRoot and configures these user accounts for 'sudo':  The 'addauser' command is intended to be run by the Arch Linux in PRoot root user:  To use 'addauser' directly from Termux, run 'startarch command addauser user' in Termux to create this account in Arch Linux PRoot:  The command 'startarch help' has more information about using 'startarch':  EXITING..."
+else
+[ ! -f /var/lock/patchmakepkg.lock ] && patchmakepkg
+printf "%s\\n" "Building and installing fakeroot-tcp: "
+([[ ! "$(command -v automake)" ]] || [[ ! "$(command -v fakeroot)" ]] || [[ ! "$(command -v git)" ]] || [[ ! "$(command -v gcc)" ]] || [[ ! "$(command -v po4a)" ]]) 2>/dev/null && (pci automake base-devel fakeroot git gcc po4a libtool || sudo pci automake base-devel fakeroot git gcc po4a libtool)
+cd && (git clone https://aur.archlinux.org/fakeroot-tcp.git && cd fakeroot-tcp && sed -i 's/  patch/  sudo patch/g' PKGBUILD && makepkg -irs && libtool --finish /usr/lib/libfakeroot) || printf "%s\\n" "Continuing to build and install fakeroot-tcp: " && cd fakeroot-tcp && sed -i 's/  patch/  sudo patch/g' PKGBUILD && makepkg -irs
+printf "%s\\n" "Building and installing fakeroot-tcp: DONE 🏁"
+fi
+# makefakeroottcp EOF

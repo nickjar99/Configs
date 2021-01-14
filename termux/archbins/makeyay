@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# Copyright 2017-2020 by SDRausty. All rights reserved, see LICENSE 🌎 🌍 🌏
+# Hosting sdrausty.github.io/TermuxArch courtesy https://pages.github.com.
+# https://sdrausty.github.io/TermuxArch/README has info about this project.
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# build and install command yay; contributors https://github.com/cb125 and https://github.com/SampsonCrowley
+##############################################################################
+# IFS=$'\n\t'
+set -Eeuo pipefail
+shopt -s nullglob globstar
+unset LD_PRELOAD
+VERSIONID=2.0.593
+ 
+_TRPERR_() {  # run on script error
+	local RV="$?"
+	printf "\\e[?25h\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "TermuxArch WARNING:  Generated script signal ${RV:-unknown} near or at line number ${1:-unknown} by `${2:-command}`!"
+	exit 201
+}
+ 
+_TRPET_() {  # run on exit
+	local RV="$?" 
+  	printf "" 
+	 
+	if [[ "$RV" = 0 ]]
+	then
+		printf "\\e[0;32m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $@ 2.0.593" "DONE 🏁 "
+		printf "\\e]2; %s: %s \007" "${0##*/} $@" "DONE 🏁 "
+	else 
+		printf "\\e[0;32m%s \\e[0m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $@ 2.0.593" "[Exit Signal $RV]" "DONE  🏁 "
+		printf "\033]2; %s: %s %s \007" "${0##*/} $@" "[Exit Signal $RV]" "DONE 🏁 "
+	fi
+	printf "\e[?25h\e[0m"
+	set +Eeuo pipefail
+	exit
+}
+ 
+_TRPSIG_() {  # run on signal
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Signal $? received!\\e[0m\\n"
+ 	exit 211
+}
+ 
+_TRPQ_() {  # run on quit
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Quit signal $? received!\\e[0m\\n"
+ 	exit 221
+}
+ 
+trap '_TRPERR_ $LINENO $BASH_COMMAND $?' ERR
+trap _TRPET_ EXIT
+trap _TRPSIG_ HUP INT TERM
+trap _TRPQ_ QUIT
+ 
+if [ "$UID" = "0" ]
+then
+printf "\\e[1;31m%s\\e[1;37m%s\\e[1;31m%s\\e[0m\\n" "Error:" "  Script '${0##*/}' should not be used as root:  The TermuxArch command 'addauser' creates user accounts in Arch Linux in PRoot and configures these user accounts for 'sudo':  The 'addauser' command is intended to be run by the Arch Linux in PRoot root user:  To use 'addauser' directly from Termux, run 'startarch command addauser user' in Termux to create this account in Arch Linux PRoot:  The command 'startarch help' has more information about using 'startarch':  " "Exiting..."
+else
+_PRMAKE_() {
+printf "\\e[1;32m==> \\e[1;37m%s\\n" "Running makepkg -irs --noconfirm..."
+}
+printf "\\e[0;32m%s\\e[0m\\n" "Building and installing 'yay':"
+printf "%s\\n" "When this message:
+libtool: warning: remember to run 'libtool --finish /usr/lib/libfakeroot'
+When this message is displayed on the screen '${0##*/}' will deal with it a little bit later in the build proccess, and there will be a short pause when this message is displayed:
+\"Libraries have been installed in:\"
+A difficult part of any build process can be choosing the correct answers.  Here are the correct answers:
+:: fakeroot-tcp and fakeroot are in conflict. Remove fakeroot? [y/N] y
+Tap the 'y' key first, then enter.  For the first question, the 'y' key must be tapped first, then enter.  Yes will be chosen when enter is tapped in all of the questions after the first question:
+:: Proceed with installation? [Y/n]
+Tap enter twice more as this build proccess continues.  If everything goes well, you will see these messages:
+Libraries have been installed in:
+The message above will be displayed for a short time with more information.  Then setupTermuxArch.sh will go on, and there will be one more tap enter yo touch before script setupTermuxArch.sh is done;  SLEEPING SIX SECONDS...
+makefakeroottcp 2.0.593: DONE 🏁
+Then this process will go on to try to make 'yay' which is much simpler for the user;  There is no tapping yes enter needed to be done whatsoever."
+sleep 6
+cd
+[ ! -f /var/lock/patchmakepkg.lock ] && patchmakepkg
+! fakeroot ls >/dev/null && makefakeroottcp
+(git clone https://aur.archlinux.org/yay.git&&cd yay&&_PRMAKE_&&makepkg -irs --noconfirm)||printf "\\e[1;37m%s\\e[0m\\n" "Continuing to build and install yay..."&&cd yay&&_PRMAKE_&&makepkg -irs --noconfirm||printf "\\e[1;31m%s\\e[1;37m%s\\n" "ERROR: " "The command 'makepkg -irs --noconfirm' did not run expected; CONTINUING..."
+printf "\\e[0;32m%s\\n%s\\n%s\\e[1;32m%s\\e[0m\\n" "Paths that can be followed after building 'yay' are 'yay cmatrix' which builds matrix screensavers.  The commands 'yay pikaur|pikaur-git|tpac' build more aur installers which can also be used to download aur repositories and build packages like with 'yay' in your Android smartphone, tablet, wearable and more.  Did you know that 'android-studio' is available with the command 'yay android'?" "If you have trouble importing keys, this command 'gpg --keyserver keyserver.ubuntu.com --recv-keys 71A1D0EFCFEB6281FD0437C71A1D0EFCFEB6281F' might help.  Change the number to the number of the key being imported." "Building and installing yay: " "DONE 🏁"
+fi
+# makeyay EOF

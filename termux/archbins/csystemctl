@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# Copyright 2017-2020 by SDRausty. All rights reserved, see LICENSE 🌎 🌍 🌏
+# Hosting sdrausty.github.io/TermuxArch courtesy https://pages.github.com.
+# https://sdrausty.github.io/TermuxArch/README has info about this project.
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# contributor https://github.com/petkar
+##############################################################################
+# IFS=$'\n\t'
+set -Eeuo pipefail
+shopt -s nullglob globstar
+unset LD_PRELOAD
+VERSIONID=2.0.593
+ 
+_TRPERR_() {  # run on script error
+	local RV="$?"
+	printf "\\e[?25h\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "TermuxArch WARNING:  Generated script signal ${RV:-unknown} near or at line number ${1:-unknown} by `${2:-command}`!"
+	exit 201
+}
+ 
+_TRPET_() {  # run on exit
+	local RV="$?" 
+  	printf "" 
+	 
+	if [[ "$RV" = 0 ]]
+	then
+		printf "\\e[0;32m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $@ 2.0.593" "DONE 🏁 "
+		printf "\\e]2; %s: %s \007" "${0##*/} $@" "DONE 🏁 "
+	else 
+		printf "\\e[0;32m%s \\e[0m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $@ 2.0.593" "[Exit Signal $RV]" "DONE  🏁 "
+		printf "\033]2; %s: %s %s \007" "${0##*/} $@" "[Exit Signal $RV]" "DONE 🏁 "
+	fi
+	printf "\e[?25h\e[0m"
+	set +Eeuo pipefail
+	exit
+}
+ 
+_TRPSIG_() {  # run on signal
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Signal $? received!\\e[0m\\n"
+ 	exit 211
+}
+ 
+_TRPQ_() {  # run on quit
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Quit signal $? received!\\e[0m\\n"
+ 	exit 221
+}
+ 
+trap '_TRPERR_ $LINENO $BASH_COMMAND $?' ERR
+trap _TRPET_ EXIT
+trap _TRPSIG_ HUP INT TERM
+trap _TRPQ_ QUIT
+ 
+INSTALLDIR="/data/data/com.termux/files/home/arch"
+printf "\\e[38;5;148m%s\\e[0m\\n" "Installing /usr/bin/systemctl replacement: "
+[ -f /var/lock/csystemctl.lock ] && printf "%s\\n" "Already installed /usr/bin/systemctl replacement: DONE 🏁" && exit
+declare COMMANDP
+COMMANDP="$(command -v python3)" || printf "%s\\n" "Command python3 not found: continuing..."
+[[ "${COMMANDP:-}" == *python3* ]] || pacman --noconfirm --color=always -S python3 || sudo pacman --noconfirm --color=always -S python3
+SDATE="$(date +%s)"
+# path is /usr/local/bin because updates overwrite /usr/bin/systemctl and may make systemctl-replacement obsolete
+# backup original binary
+mv -f /usr/bin/systemctl /data/data/com.termux/files/home/arch/var/backups/arch/systemctl.$SDATE.bkp
+printf "\\e[38;5;148m%s\\n\\e[0m" "Moved /usr/bin/systemctl to /data/data/com.termux/files/home/arch/var/backups/arch/systemctl.$SDATE.bkp"
+printf "%s\\n" "Getting replacement systemctl from https://raw.githubusercontent.com/TermuxArch/docker-systemctl-replacement/master/files/docker/systemctl3.py"
+# Arch Linux package 'systemctl' updates will mot halt functioning as /usr/local/bin precedes /usr/bin in the PATH
+# downlaodvand copy to both /usr/local/bin and /usr/bin
+curl --fail --retry 2 https://raw.githubusercontent.com/TermuxArch/docker-systemctl-replacement/master/files/docker/systemctl3.py|tee /usr/bin/systemctl /usr/local/bin/systemctl >/dev/null
+chmod 700 /usr/bin/systemctl /usr/local/bin/systemctl
+[ ! -e /run/lock ] && mkdir -p /run/lock
+touch /var/lock/csystemctl.lock
+printf "\\e[38;5;148m%s\\e[1;32m%s\\e[0m\\n" "Installing systemctl replacement in /usr/local/bin and /usr/bin: " "DONE 🏁"
+# csystemctl EOF

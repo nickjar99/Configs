@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+# Copyright 2017-2020 by SDRausty. All rights reserved, see LICENSE 🌎 🌍 🌏
+# Hosting sdrausty.github.io/TermuxArch courtesy https://pages.github.com.
+# https://sdrausty.github.io/TermuxArch/README has info about this project.
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# add Arch Linux in Termux PRoot user
+##############################################################################
+# IFS=$'\n\t'
+set -Eeuo pipefail
+shopt -s nullglob globstar
+unset LD_PRELOAD
+VERSIONID=2.0.593
+ 
+_TRPERR_() {  # run on script error
+	local RV="$?"
+	printf "\\e[?25h\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "TermuxArch WARNING:  Generated script signal ${RV:-unknown} near or at line number ${1:-unknown} by `${2:-command}`!"
+	exit 201
+}
+ 
+_TRPET_() {  # run on exit
+	local RV="$?" 
+  	printf "" 
+	 
+	if [[ "$RV" = 0 ]]
+	then
+		printf "\\e[0;32m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $@ 2.0.593" "DONE 🏁 "
+		printf "\\e]2; %s: %s \007" "${0##*/} $@" "DONE 🏁 "
+	else 
+		printf "\\e[0;32m%s \\e[0m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $@ 2.0.593" "[Exit Signal $RV]" "DONE  🏁 "
+		printf "\033]2; %s: %s %s \007" "${0##*/} $@" "[Exit Signal $RV]" "DONE 🏁 "
+	fi
+	printf "\e[?25h\e[0m"
+	set +Eeuo pipefail
+	exit
+}
+ 
+_TRPSIG_() {  # run on signal
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Signal $? received!\\e[0m\\n"
+ 	exit 211
+}
+ 
+_TRPQ_() {  # run on quit
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Quit signal $? received!\\e[0m\\n"
+ 	exit 221
+}
+ 
+trap '_TRPERR_ $LINENO $BASH_COMMAND $?' ERR
+trap _TRPET_ EXIT
+trap _TRPSIG_ HUP INT TERM
+trap _TRPQ_ QUIT
+ 
+_HUSDIRC_() {
+if [[ ! -d "/home/$@" ]]
+then
+_FUNADDU_ "$@"
+else
+printf "\\e[1;31mDIRECTORY: \\e[1;37m'/home/$@ exists'\\e[1;31m: EXITING...\\n"
+fi
+}
+_FUNADDU_() {
+if [[ -z "${1:-}" ]]
+then
+printf "\\e[1;31mUSAGE: \\e[1;37m'addauser username'\\e[1;31m: EXITING...\\n"
+exit 201
+else
+if [ "$UID" != "0" ]
+then
+printf "\\n\\e[1;31mUSAGE:\\e[1;37m %s\\e[1;31m: EXITING...\\e[0m\\n\\n" "Script '${0##*/}' must be run using the root account, not the '$(whoami)' account"
+else
+[[ ! "$(command -v sudo)" ]] 2>/dev/null && pci sudo
+printf "\\e[0;32m%s\\n\\e[1;32m" "Adding Arch Linux in Termux PRoot user '$1' and creating Arch Linux in Termux PRoot user $1's home directory in /home/$1..."
+sed -i "/# %wheel ALL=(ALL) NOPASSWD: ALL/ s/^# *//" /etc/sudoers
+sed -i "/# ALL ALL=(ALL) ALL/ s/^# *//" /etc/sudoers
+sed -i "s/# ALL ALL=(ALL) ALL/ALL ALL=(ALL) NOPASSWD: ALL/g" /etc/sudoers
+grep -q 'ftp_proxy' /etc/sudoers && : || echo 'Defaults env_keep += "ftp_proxy http_proxy https_proxy"' >> /etc/sudoers
+sed -i "s/required/sufficient/g" /etc/pam.d/su
+sed -i "s/^#auth/auth/g" /etc/pam.d/su
+useradd -k /root -m -s /bin/bash "$1" -U
+usermod "$1" -aG wheel
+chage -I -1 -m 0 -M -1 -E -1 "$1"
+passwd -d "$1"
+chmod 775 /home/$1
+chown -R $1:$1 /home/$1
+#		method depreciated
+#  		[[ -d /etc/sudoers.d ]] && printf "%s\\n" "$1 ALL=(ALL) ALL" >> /etc/sudoers.d/"$1"
+sed -i "s/$1:x/$1:/g" /etc/passwd
+printf "\\e[0;32m%s\\e[1;32m%s\\e[0;32m%s\\e[1;32m%s\\e[0;32m%s\\e[1;32m%s\\e[0;32m%s\\e[1;32m%s\\e[0;32m%s\\e[0m\\n" "Added Arch Linux in Termux PRoot user " "'$1'" " and configured user '$1' for use with the Arch Linux command 'sudo'.  Created Arch Linux user $1's home directory in /home/$1.  To use this account run " "'startarch login $1'" " from the shell in Termux.  To add user accounts you can use " "'addauser $1'" " in Arch Linux and " "'startarch c[ommand] addauser $1'" " in the default Termux shell.  Please remember not to nest proot in proot unknowingly by using 'startarch' in 'startarch' as this is known to cause issues for PRoot users."
+fi
+fi
+}
+_PMFSESTRING_() {
+printf "\\e[1;31m%s\\e[1;37m%s\\e[1;32m%s\\e[1;37m%s\\n\\n" "Signal generated in '$1' : Cannot complete task : " "Continuing..."
+printf "\\e[1;34m%s\\e[0;34m%s\\e[1;34m%s\\e[0;34m%s\\e[1;34m%s\\e[0m\\n\\n" "  If you find improvements for " "setupTermuxArch" " and " "$0" " please open an issue and accompanying pull request."
+}
+_HUSDIRC_ "$@"
+# addauser EOF

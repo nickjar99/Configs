@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+# Copyright 2017-2020 by SDRausty. All rights reserved, see LICENSE 🌎 🌍 🌏
+# Hosting sdrausty.github.io/TermuxArch courtesy https://pages.github.com.
+# https://sdrausty.github.io/TermuxArch/README has info about this project.
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+# A short tour that shows a few of the new featires of this system.
+##############################################################################
+# IFS=$'\n\t'
+set -Eeuo pipefail
+shopt -s nullglob globstar
+unset LD_PRELOAD
+VERSIONID=2.0.593
+ 
+_TRPERR_() {  # run on script error
+	local RV="$?"
+	printf "\\e[?25h\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "TermuxArch WARNING:  Generated script signal ${RV:-unknown} near or at line number ${1:-unknown} by `${2:-command}`!"
+	exit 201
+}
+ 
+_TRPET_() {  # run on exit
+	local RV="$?" 
+  	printf "" 
+	 
+	if [[ "$RV" = 0 ]]
+	then
+		printf "\\e[0;32m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $@ 2.0.593" "DONE 🏁 "
+		printf "\\e]2; %s: %s \007" "${0##*/} $@" "DONE 🏁 "
+	else 
+		printf "\\e[0;32m%s \\e[0m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $@ 2.0.593" "[Exit Signal $RV]" "DONE  🏁 "
+		printf "\033]2; %s: %s %s \007" "${0##*/} $@" "[Exit Signal $RV]" "DONE 🏁 "
+	fi
+	printf "\e[?25h\e[0m"
+	set +Eeuo pipefail
+	exit
+}
+ 
+_TRPSIG_() {  # run on signal
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Signal $? received!\\e[0m\\n"
+ 	exit 211
+}
+ 
+_TRPQ_() {  # run on quit
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Quit signal $? received!\\e[0m\\n"
+ 	exit 221
+}
+ 
+trap '_TRPERR_ $LINENO $BASH_COMMAND $?' ERR
+trap _TRPET_ EXIT
+trap _TRPSIG_ HUP INT TERM
+trap _TRPQ_ QUIT
+ 
+printf "\\n\\e[1;32m==> \\e[1;37mRunning \\e[1;32mls -alr --color=always $HOME \\e[1;37m\\n\\n"
+sleep 1
+ls -alr --color=always "$HOME"
+sleep 4
+printf "\\n\\e[1;32m==> \\e[1;37mRunning \\e[1;32mcat $HOME/.bash_profile\\e[1;37m\\n\\n"
+sleep 1
+cat "$HOME"/.bash_profile
+sleep 4
+printf "\\n\\e[1;32m==> \\e[1;37mRunning \\e[1;32mcat $HOME/.bashrc\\e[1;37m\\n\\n"
+sleep 1
+cat "$HOME"/.bashrc
+sleep 4
+printf "\\n\\e[1;32m==> \\e[1;37mRunning \\e[1;32mcat $HOME/bin/pci\\e[1;37m\\n\\n"
+sleep 1
+cat "$HOME"/bin/pci
+printf "\\e[1;32m\\n%s \\e[38;5;121m%s \\n\\n\\e[4;38;5;129m%s\\e[0m\\n\\n\\e[1;34m%s \\e[38;5;135m%s\\e[0m\\n\\n" "==>" "Short tour is complete; Scroll up if you wish to study the output.  Run this script again at a later time, and it might be surprising at how this environment changes over time. " "If you are new to *nix, http://tldp.org has documentation." "IRC: " "https://wiki.archlinux.org/index.php/IRC_channel"
+# tour EOF
