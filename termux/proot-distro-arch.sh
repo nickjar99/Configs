@@ -4,8 +4,8 @@ pacman -Syuu --noconfirm git wget curl zsh sudo vim
 
 useradd -m -G wheel user
 
-sed -i "s/#* *%wheel ALL=(ALL) ALL/%wheel ALL=(ALL) NOPASSWD: ALL/"
-echo "\nuser ALL=(ALL) NOPASSWD: ALL\n" >> /etc/sudoers
+sed -i "s/#* *%wheel ALL=(ALL) ALL/%wheel ALL=(ALL) NOPASSWD: ALL/" /etc/sudoers
+echo nuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 echo "Enter Root Password:"
 passwd
