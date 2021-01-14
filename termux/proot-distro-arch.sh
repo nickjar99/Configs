@@ -12,4 +12,8 @@ passwd
 echo "Enter User Password:"
 passwd user
 
+# only one will work
+cp -rv ~/Configs /home/user/Configs
+cp -rv ~/configs /home/user/Configs
+
 # cp proot-distro-arch.sh /home/user
