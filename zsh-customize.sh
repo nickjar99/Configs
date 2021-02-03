@@ -12,6 +12,17 @@ echo "alias gcl=\"git clone\"\n" >> ~/.zshrc
 echo "alias nf=\"neofetch\"\n" >> ~/.zshrc
 
 
-echo "function y () { youtube-dl -o \"%(title)s.%(ext)s\" $@ }" >> ~/.zshrc
+echo "function y () { time youtube-dl -o \"%(title)s.%(ext)s\" $@ }" >> ~/.zshrc
+
+echo "function gcl () { git clone $@ }" >> ~/.zshrc
+echo "function gpl () { git pull }" >> ~/.zshrc
+echo "function gph () { git push }" >> ~/.zshrc
+echo "function f () { find . -iname \"$@\" }" >> ~/.zshrc
+
+
+
+echo "alias n=ncdu" >> ~/.zshrc
+
+
 
 
