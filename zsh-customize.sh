@@ -3,8 +3,16 @@
 echo "Customizing oh-my-zsh install..."
 
 # takes away left side of status bar
-#sed "11s/robbyrussell/agnoster/" -i ~/.zshrc
-#sed "219d; 91,94d; 90s/{/{}/" -i ~/.oh-my-zsh/themes/agnoster.zsh-theme
+
+echo "$1"
+if [[ "$1" == "agnoster" ]]; then
+    echo "Theme: Agnoster"
+    sed "11s/robbyrussell/agnoster/" -i ~/.zshrc
+    # sed "219d; 91,94d; 90s/{/{}/" -i ~/.oh-my-zsh/themes/agnoster.zsh-theme
+else
+    echo "Theme: Default"
+    sed "11s/agnoster/robbyrussell/" -i ~/.zshrc
+fi
 
 # aliases
 echo "alias ytdl=youtube-dl\n" >> ~/.zshrc

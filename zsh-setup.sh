@@ -8,7 +8,7 @@ export RUNZSH=no
 if [[ $( grep ^$(id -un): /etc/passwd | cut -d : -f 7- )=="/usr/bin/zsh" ]]; then
     export CHSH=no
 fi
-sh install.sh
+bash install.sh
 rm install.sh
 
-sh zsh-customize.sh
+bash zsh-customize.sh "$@"
