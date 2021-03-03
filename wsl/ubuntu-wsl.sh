@@ -17,3 +17,4 @@ bash ../git.sh
 # sh zsh-full.sh
 # sh oh-my-zsh-custom.sh
 bash ../zsh-setup.sh
+bash ../zsh-customize.sh agnoster

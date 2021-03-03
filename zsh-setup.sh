@@ -14,6 +14,6 @@ bash zsh-customize.sh "$@"
 if [[ $( grep ^$(id -un): /etc/passwd | cut -d : -f 7- )!="/usr/bin/zsh" ]]; then
     if [[ "$SHELL"!="/usr/bin/zsh" ]]; then
     # export CHSH=no
-        chsh -s /usr/bin/zsh
+        sudo chsh -s /usr/bin/zsh
     fi
 fi

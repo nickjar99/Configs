@@ -8,4 +8,5 @@ sudo apt install -y wget curl git vim nano neofetch \
 
 bash ../sh git.sh
 # sh zsh-full.sh
-bash ../oh-my-zsh-custom.sh
+bash ../zsh-setup.sh agnoster
+bash ../zsh-customize.sh agnoster
