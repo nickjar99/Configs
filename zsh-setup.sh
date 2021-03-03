@@ -5,7 +5,7 @@ rm -rf ~/.oh-my-zsh
 
 curl -o install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 export RUNZSH=no
-if [[ $(grep ^$(id -un): /etc/passwd | cut -d : -f 7-)=="/usr/bin/zsh" ]]; then
+if [[ $( grep ^$(id -un): /etc/passwd | cut -d : -f 7- )=="/usr/bin/zsh" ]]; then
     export CHSH=no
 fi
 sh install.sh
