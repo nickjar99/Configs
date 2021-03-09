@@ -19,4 +19,4 @@ cd ~/Configs/termux/
 ./archbins/patchmakepkg
 ./archbins/makeyay
 
-yay -Syuu yay-git ncdu zsh ncdu neofetch git-lfs base-devel
+yay -Syuu yay-git ncdu zsh ncdu neofetch git-lfs base-devel p7zip-full
