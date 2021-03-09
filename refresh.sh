@@ -1,5 +1,6 @@
 #!/bin/sh
 
+rm -rf *
 cd ..
 rm -rf configs
 rm -rf Configs
