@@ -1,9 +1,10 @@
 # Todo: add more packages
 # pacstrap /mnt - < pacman-main.txt
-pacstrap /mnt linux linux-firmware base sudo grub git vim nano
-genfstab -U /mnt >> /mnt/etc/fstab
 
-arch-chroot /mnt
+
+# pacstrap /mnt linux linux-firmware base sudo grub git vim nano
+# genfstab -U /mnt >> /mnt/etc/fstab
+# arch-chroot /mnt
 
 ln -sf /usr/share/zoneinfo/America/Denver /etc/localtime
 hwclock --systohc
@@ -25,5 +26,10 @@ useradd -m -G wheel nick
 
 echo "Enabling multilib"
 printf "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+
+echo "Root password:"
+passwd
+echo "Nick password:"
+passwd nick
 
 echo "Next, setup bootloader & passwords, then reboot into new user. Setup network through networkmanager"
