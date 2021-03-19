@@ -6,7 +6,10 @@
 # genfstab -U /mnt >> /mnt/etc/fstab
 # arch-chroot /mnt
 
-pacman -Sy grub git vim nano networkmanager wget curl os-prober ntfs-3g efibootmgr unzip pigz tar wpa_supplicant iw ncdu 
+echo "Enabling multilib"
+printf "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+
+pacman -Sy grub git vim nano networkmanager sudo wget curl os-prober ntfs-3g efibootmgr unzip pigz tar wpa_supplicant iw ncdu zsh 
 
 ln -sf /usr/share/zoneinfo/America/Denver /etc/localtime
 hwclock --systohc
@@ -22,12 +25,9 @@ printf "\n\n127.0.0.1	localhost\n::1		localhost\n127.0.1.1	Arch.localdomain Arch
 
 echo "Creating user"
 
-echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
+# echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
 useradd -m -G wheel nick
 # useradd -m -G wheel nick
-
-echo "Enabling multilib"
-printf "[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 
 echo "Root password:"
 passwd
