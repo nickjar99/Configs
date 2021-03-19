@@ -6,6 +6,8 @@
 # genfstab -U /mnt >> /mnt/etc/fstab
 # arch-chroot /mnt
 
+pacman -Sy grub git vim nano networkmanager wget curl os-prober ntfs-3g efibootmgr unzip pigz tar
+
 ln -sf /usr/share/zoneinfo/America/Denver /etc/localtime
 hwclock --systohc
 
@@ -31,5 +33,7 @@ echo "Root password:"
 passwd
 echo "Nick password:"
 passwd nick
+
+
 
 echo "Next, setup bootloader & passwords, then reboot into new user. Setup network through networkmanager"
