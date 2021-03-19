@@ -6,7 +6,7 @@
 # genfstab -U /mnt >> /mnt/etc/fstab
 # arch-chroot /mnt
 
-pacman -Sy grub git vim nano networkmanager wget curl os-prober ntfs-3g efibootmgr unzip pigz tar
+pacman -Sy grub git vim nano networkmanager wget curl os-prober ntfs-3g efibootmgr unzip pigz tar wpa_supplicant iw ncdu 
 
 ln -sf /usr/share/zoneinfo/America/Denver /etc/localtime
 hwclock --systohc
