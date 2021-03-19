@@ -15,7 +15,7 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "Arch" > /etc/hostname
 printf "\n\n127.0.0.1	localhost\n::1		localhost\n127.0.1.1	Arch.localdomain Arch" >> /etc/hosts
 
-mkinitcpio -p linux
+# mkinitcpio -p linux
 
 echo "Creating user"
 
