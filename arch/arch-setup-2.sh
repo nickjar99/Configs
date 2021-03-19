@@ -9,7 +9,7 @@
 echo "Enabling multilib"
 printf "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 
-pacman -Sy grub git vim nano networkmanager sudo wget curl os-prober ntfs-3g efibootmgr unzip pigz tar wpa_supplicant iw ncdu zsh 
+pacman -Sy grub git vim nano networkmanager sudo wget curl os-prober ntfs-3g efibootmgr unzip pigz tar wpa_supplicant iw ncdu zsh dhcpcd 
 
 ln -sf /usr/share/zoneinfo/America/Denver /etc/localtime
 hwclock --systohc
