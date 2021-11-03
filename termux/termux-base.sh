@@ -4,30 +4,27 @@
 
 pkg up -y
 
-pkg in -y game-repo science-repo unstable-repo x11-repo root-repo
+pkg in -y game-repo science-repo x11-repo root-repo
 
-pkg in -y git wget curl openssh python neofetch htop man termux-api zsh tigervnc nano vim zip ncdu ffmpeg tsu build-essential bsdtar proot   
+pkg in -y git curl wget zsh openssh python neofetch htop man termux-api zsh tigervnc nano vim zip ncdu ffmpeg tsu build-essential bsdtar proot rsync 
 
-git config --global credential.helper store
-git config --global user.email "njarmusz@mymail.mines.edu"
-git config --global user.name "njarmusz"
-git config --global http.postBuffer 2097152000
-git config --global https.postBuffer 2097152000
+bash git.sh
 
 # Setting up ssh keys if they aren't already
-if [ ! -d ~/.ssh ]; then
+if [[ ! -d ~/.ssh ]]; then
     ssh-keygen -N "" -f ~/.ssh/id_rsa
 else
     echo "SSH keys already exist"
 fi
 sshd
 
+mkdit -p ~/.termux/boot
 echo "#!/data/data/com.termux/files/usr/bin/sh\n    termux-wake-lock\n    sshd" > ~/.termux/boot/start-sshd  
 
 
 # youtube-dl
-curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /data/data/com.termux/files/usr/bin/youtube-dl
-chmod a+rx /data/data/com.termux/files/usr/bin/youtube-dl
+python3 -m pip install --upgrade pip youtube-dl youtube-dlc
+
 
 # oh-my-zsh
 if [ -d ~/.oh-my-zsh ]; then rm -rf ~/.oh-my-zsh ~/.zshrc; fi
