@@ -9,6 +9,7 @@ if [[ "$1" == "agnoster" ]]; then
     echo "Theme: Agnoster"
     sed "11s/robbyrussell/agnoster/" -i ~/.zshrc
     # sed "219d; 91,94d; 90s/{/{}/" -i ~/.oh-my-zsh/themes/agnoster.zsh-theme
+    sed "s/  prompt_git/#  prompt_git/g" -i ~/.oh-my-zsh/themes/agnoster.zsh-theme
 else
     echo "Theme: Default"
     sed "11s/agnoster/robbyrussell/" -i ~/.zshrc
