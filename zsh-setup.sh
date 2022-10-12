@@ -9,6 +9,7 @@ export CHSH=no
 bash install.sh
 rm install.sh
 
+bash git.sh
 bash zsh-customize.sh "$@"
 
 if [[ $( grep ^$(id -un): /etc/passwd | cut -d : -f 7- )!="/usr/bin/zsh" ]]; then
