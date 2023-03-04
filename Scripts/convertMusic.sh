@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-files=$(find $1 -type f )
-
 echo "Creating parent folder tree"
 find $1 -type d | while read -r dir
 do
