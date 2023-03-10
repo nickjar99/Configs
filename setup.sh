@@ -1,7 +1,7 @@
 #!/bin/bash
 
-./git.sh
-./zsh-setup.sh
+bash git.sh
+bash zsh-setup.sh
 
 platform=$1
 echo "Platform: $platform"
