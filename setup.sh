@@ -10,12 +10,12 @@ echo "Platform: $platform"
 if [ "$platform" == "wsl" ]
 then
 	echo "Matched platform wsl"
-	./setup-wsl.sh
+	bash setup-wsl.sh
 fi
 
 if [ "$platform" == "termux" ]
 then
 	echo "Matched platform termux"
-	./setup-termux.sh
+	bash setup-termux.sh
 fi
 
