@@ -9,7 +9,7 @@ export CHSH=no
 bash install.sh
 rm install.sh
 
-bash zsh-customize.sh 
+bash zsh-customize.sh $1
 
 # old me what the hell is this
 # if [[ $( grep ^$(id -un): /etc/passwd | cut -d : -f 7- )!="/usr/bin/zsh" ]]; then
