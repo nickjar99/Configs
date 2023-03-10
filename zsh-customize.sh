@@ -6,7 +6,7 @@ sed "11s/robbyrussell/agnoster/" -i ~/.zshrc
 sed "s/  prompt_git/#  prompt_git/g" -i ~/.oh-my-zsh/themes/agnoster.zsh-theme
 
 # aliases
-echo "alias nf=\"neofetch\"" >> ~/.zshrc
+echo "alias nf='neofetch'" >> ~/.zshrc
 echo "alias n='time ncdu'" >> ~/.zshrc
 
 echo "alias f='find . -type f -iname'" >> ~/.zshrc
