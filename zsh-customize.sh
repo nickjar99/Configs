@@ -1,9 +1,8 @@
 #!/bin/bash
 
-echo "Customizing oh-my-zsh install..."
+echo "Customizing install..."
 agnoster="$HOME/.oh-my-zsh/themes/agnoster.zsh-theme"
 
-echo "$1"
 # Prompt color
 if [ ! -z $1 ]
 then
@@ -27,7 +26,6 @@ echo "alias n='time ncdu'" >> ~/.zshrc
 
 echo "alias f='find . -type f -iname'" >> ~/.zshrc
 echo "alias gcl='git clone'" >> ~/.zshrc
-
 
 echo "export PATH=\$PATH:$HOME/.local/bin" >> ~/.zshrc
 echo "export PATH=\$PATH:$HOME/.cargo/bin" >> ~/.zshrc
