@@ -2,5 +2,6 @@ arch/pacman-all.txt
 install.sh.*
 miniconda.sh.*
 raspi/.progress*
+*.swp
 
 .vscode
