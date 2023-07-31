@@ -28,6 +28,8 @@ echo "alias n='time ncdu'" >> ~/.zshrc
 echo "alias f='find . -type f -iname'" >> ~/.zshrc
 echo "unalias gr" >> ~/.zshrc
 echo "alias gr='grep'" >> ~/.zshrc
+echo "alias t='time'" >> ~/.zshrc
+
 
 echo "export PATH=\$PATH:$HOME/.local/bin" >> ~/.zshrc
 echo "export PATH=\$PATH:$HOME/.cargo/bin" >> ~/.zshrc
